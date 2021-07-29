@@ -100,3 +100,16 @@ WHERE C.EMP_ID = 1
 GROUP BY C.STATUS
 ORDER BY CASE_COUNT
 
+--UPDATE CASES
+
+--Update address of customer
+--TODO: Fill in
+
+--Update gross of product
+--TODO: Fill in
+
+--Delete Salesperson from Table
+--TODO: Fill in
+
+--Close case
+--TODO: Fill in
