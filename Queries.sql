@@ -100,16 +100,18 @@ WHERE C.EMP_ID = 1
 GROUP BY C.STATUS
 ORDER BY CASE_COUNT
 
---UPDATE CASES
+--UPDATE AND DELETE CASES
 
 --Update address of customer
---TODO: Fill in
-
---Update gross of product
---TODO: Fill in
+UPDATE CUSTOMER
+SET STREET = '123 MAIN STREET', CITY = 'EXAMPLETOWN', STATE = 'CA', ZIP = '60999'
+WHERE C.CUST_ID = 1
 
 --Delete Salesperson from Table
---TODO: Fill in
+DELETE FROM SALESPERSONS
+WHERE SP_ID = 1
 
 --Close case
---TODO: Fill in
+UPDATE CASE
+SET TIMECLOSED = TO_DATE('01/02/2021', 'MM/DD/YYYY')
+WHERE CASE_ID = 1
