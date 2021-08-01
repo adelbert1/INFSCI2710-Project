@@ -1,152 +1,254 @@
-#Test happy path insertion into each table
-#Test that each constraint is properly catching whatever error it is designed to catch.
+//Test happy path insertion into each table
+//Test that each constraint is properly catching whatever error it is designed to catch.
 
-#TEST CUSTOMERS
+//Assumptions: System users will not enter numeric characters where it is not appropriate. For example, they will not enter numbers in the CUSTOMERS name, city, state, or company fields. 
 
-	#HAPPY PATH
-		insert into CUSTOMERS(NAME,STREET, CITY, STATE, ZIP, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES('John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 250000)
+/*Note: Wherever a test is marked as PASS, it indicates that the DDL code worked as expected. 
+Either 1) an error results where we expected to receive an error or 
+2) the code did not result in an error when we did not expect any errors. */
 
-#TEST PRODUCTS
-	#We already have a script where we insert products, so that part seems fine.
+//TEST SALESPERSONS
 
-#TEST SALESPERSONS
-	#HAPPY PATH
+	//HAPPY PATH
 		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
 		VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
 
-	#TEST EMAIL_FORMAT CHECK -- Should throw an error
+	//TEST EMAIL_FORMAT CHECK -- Email entries that are not in the proper format should result in an error
 		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
 		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'BadFormat', 'Salesperson')
+	//Test Result: PASS
 
-#TEST EMPLOYEES
-	#HAPPY PATH
+	//TEST BLANK AND NULL NAMES
+	//Blank or null entries in NAME field should result in an arror.
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+		VALUES('', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
+
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+		VALUES(NULL, '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
+	//Test Result: PASS	
+
+//TEST CUSTOMERS
+
+	//HAPPY PATH
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+
+	//TEST NULL NAMES
+	//Blank or null entries in NAME field should result in an arror.
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, '', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, NULL, '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+	//Test Result: PASS
+ 
+
+	//TEST BLANK AND NULL SP_ID
+	//Blank or null entries in SP_ID field should result in an arror.
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES('', 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(NULL, 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+	//Test Result: PASS
+
+//TEST PRODUCTS
+	//HAPPY PATH
+		insert into PRODUCTS(NAME, DESCRIPTION)
+
+	//TEST BLANK AND NULL NAMES
+	//Blank or null entries in NAME field should result in an arror.
+		insert into PRODUCTS(NAME, DESCRIPTION)
+		VALUES('', 'Test Description')
+
+		insert into PRODUCTS(NAME, DESCRIPTION)
+		VALUES(NULL, 'Test Description')
+	//Test Result: PASS
+
+	//TEST BLANK AND NULL DESCRIPTIONS
+	//Blank or null entries in DESCRIPTION field should result in an arror.
+		insert into PRODUCTS(NAME, DESCRIPTION)
+		VALUES('Test Name', '')
+
+		insert into PRODUCTS(NAME, DESCRIPTION)
+		VALUES('Test Name', NULL)
+	//Test Result: PASS	
+
+
+
+//TEST EMPLOYEES
+	//HAPPY PATH
 		insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
 		VALUES('Antonio M Burnside', '105 Woodland Avenue', 'New Orleans', 'LA', 70112, '202-555-0543', 'yicaxe9769@ovooovo.com')
-	#TEST EMAIL_FORMAT CHECK
+	
+	//TEST NULL NAMES
+	//Blank or null entries in NAME field should result in an arror.
+		insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
+		VALUES('', '105 Woodland Avenue', 'New Orleans', 'LA', 70112, '202-555-0543', 'yicaxe9769@ovooovo.com')
+
+		insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
+		VALUES(NULL, '105 Woodland Avenue', 'New Orleans', 'LA', 70112, '202-555-0543', 'yicaxe9769@ovooovo.com')
+	//Test Result: PASS
+
+	//TEST EMAIL_FORMAT CHECK
 		insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
 		VALUES('James V Haman', '4009 Walkers Ridge Way', 'SHASTA', 'CA', 96087, '202-555-0708', 'badformat@@@oeee...cccc')	
-	#TEST PHONE_FORMAT CHECK
+	
+	//TEST PHONE_FORMAT CHECK
 		insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
 		VALUES('Cynthia M Hall', '410 Patterson Fork Road', 'Lombard', 'IL', 60148, '3126717922', 'yicaxe9769@ovooovo.com')
 
-#TEST CASES
-	#HAPPY PATH
-		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMPLOYEE_ID, PRODUCT_ID, TIMEOPENED, TIMECLOSED)
-		VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 2, TO_DATE('20210304','YYYYMMDD'), TO_DATE('20210512','YYYYMMDD'))
-    
-  #TEST NOT NULL TIMEOPENED FORMAT 
-		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMPLOYEE_ID, PRODUCT_ID, TIMEOPENED, TIMECLOSED)
-    VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 2, NULL, TO_DATE('20210512','YYYYMMDD'))
 
-#TEST CASE_COMMENTS
-	#HAPPY PATH
-		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, CASE_COMMENT)
-		VALUES(1, '12:00:00', 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+//TEST OWN
+	//HAPPY PATH
+		insert into OWN(CUST_ID, P_ID)
+		VALUES(1,1)
 
-	#M: Insert more case comments into the same case?
-	#A: Yes, it would make sense to enable multiple case comments for a single case. Reflecting on this, I think the intention is to record the time of the comment was made, 
-	#   so I made an edit to the CASE_COMMENTS table where CASE_TIME is now changed to COMMENT_TIME.
-	#A: I had to put single quotes around the COMMENT_TIME to have the code work without errors.
+	//TEST MANY-TO-MANY RELATIONSHP BETWEEN CUSTOMERS AND PRODUCTS
+	/*A Customer should be able to own many different products. 
+	Conversely, any individual product should be able to be owned by many different customers.
+	The addition of multiple entries should not result in any errors.*/
 
-#TEST RESOLUTIONS
-	#HAPPY PATH
-		insert into RESOLUTIONS(RES_NAME, PRODUCT, STEPS)
-		VALUES('Valve Adaptation', 'Icetex', 'Customer was instructed to turn the valve with their hand rather than a high-powered drill. Customer reports product is now working effectively') 
-
-	#A: I'm wondering if there is a way to create a constraint where the product specified in a resolution must also match the product specified in the case that LEADS_TO the associated resolution.
-  #M: I think we can avoid this by resolving the LEADS_TO issue we previously specified.
-
-#TEST SERVE
-	#HAPPY PATH
-	insert into SERVE(SP_ID, CUST_ID)
-	VALUES(1,1)
-
-	#Try to insert the same value and see if you get an error (you should)
-	insert into SERVE(SP_ID, CUST_ID)
-	VALUES(1,1)	
-
-	#Test one(SP) to many(CUST)
-	insert into SERVE(SP_ID, CUST_ID)
-	VALUES(1,2)	
+	//Test one(CUST) to many(P)
+		insert into OWN(CUST_ID, P_ID)
+		VALUES (1,1), (1,2)	
+	//Test Result: PASS
 	
-	#Test one(CUST) to many(SP)
-	insert into SERVE(SP_ID, CUST_ID)
-	VALUES(2,1)	
+	//Test one(P) to many(CUST)
+		insert into OWN(CUST_ID, P_ID)
+		VALUES (1, 1), (2,1)
+	//Test Result: PASS	
 
-#TEST SELL
-	#HAPPY PATH
-	insert into SELL(SP_ID, P_ID)
-	VALUES(1,1)
 
-	#Try to insert the same value and see if you get an error (you should)
-	insert into SELL(SP_ID, P_ID)
-	VALUES(1,1)	
+//TEST CASES
+	//HAPPY PATH
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
 
-	#Test one(SP) to many(P)
-	insert into SELL(SP_ID, P_ID)
-	VALUES(1,2)	
+	//TEST BLANK AND NULL SUMMARY
+	//Blank or null entries in SUMMARY field should result in an arror.
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('', 'Test Case', TRUE, 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
+
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES(NULL, 'Test Case', TRUE, 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
+	//Test Result: PASS
+
+	//TEST BLANK OR NULL STATUS
+	//Blank or null entries in STATUS field should result in an arror.
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', "", 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
+
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', NULL, 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
+	//Test Result: PASS		
+
+	//TEST NON-BOOLEAN STATUS
+	//Non-boolean entries in STATUS field should result in an arror.
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', 3, 1, 2, TO_DATE('20210304','YYYYMMDD'), NULL)
+	//Test Result: PASS
+
+	//TEST BLANK AND NULL TIMEOPENED
+	//Blank or null entries in TIMEOPENED field should result in an arror.
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', TRUE, 1, 2, "", NULL)
+
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', TRUE, 1, 2, NULL, NULL)
+	//Test Result: PASS			
 	
-	#Test one(P) to many(SP)
-	insert into SELL(SP_ID, P_ID)
-	VALUES(2,1)	
-
-#TEST OWN
-	#HAPPY PATH
-	insert into OWN(CUST_ID, P_ID)
-	VALUES(1,1)
-
-	#Try to insert the same value and see if you get an error (you should)
-	insert into OWN(CUST_ID, P_ID)
-	VALUES(1,1)	
-
-	#Test one(cust) to many(product)
-	insert into OWN(CUST_ID, P_ID)
-	VALUES(1,2)	
+	//TEST CONDITIONAL TIMECLOSED
+	//TIMECLOSED should not accept an entry unless that status of the case is set to closed.
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', TRUE, 1, 2, TO_DATE('20210304','YYYYMMDD'), TO_DATE('20210305','YYYYMMDD'))
+		//The above result should be a failure
+		
+		insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+		VALUES('Test Case', 'Test Case', FALSE, 1, 2, TO_DATE('20210304','YYYYMMDD'), TO_DATE('20210305','YYYYMMDD'))
+		//The above result should be a success
+	//Test Result: PASS		
 	
-	#Test one(product) to many(cust)
-	insert into OWN(CUST_ID, P_ID)
-	VALUES(2,1)	
 
-#TEST SUPPORT
-	#HAPPY PATH
-	insert into SUPPORT(CASE_ID, P_ID)
-	VALUES(1,1)
+//TEST CASE_COMMENTS
+	//HAPPY PATH
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '12:00:00', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot')
 
-	#Try to insert the same value and see if you get an error (you should)
-	insert into SUPPORT(CASE_ID, P_ID)
-	VALUES(1,1)	
+	//TEST BLANK AND NULL COMMENT_TIME
+	//Blank or null entries in COMMENT_TIME field should result in an arror.
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+		
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, NULL, TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+	//Test Result: PASS
 
-	#Test one(case) to many(product) (should fail; only one product for case)
-	insert into SUPPORT(CASE_ID, P_ID)
-	VALUES(1,2)	
+	//TEST BLANK AND NULL CASE_DATE
+	//Blank or null entries in CASE_DATE field should result in an arror.
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '12:00:00', '', 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+		
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '12:00:00', NULL, 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+	//Test Result: PASS	
+
+	//TEST BLANK AND NULL CASE_COMMENT
+	//Blank or null entries in CASE_COMMENT field should result in an arror.
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '12:00:00', TO_DATE('20210304','YYYYMMDD'), '')
+		
+		insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+		VALUES(1, '12:00:00', TO_DATE('20210304','YYYYMMDD'), NULL)
+	//Test Result: PASS			
+
+
+//TEST RESOLUTIONS
+	//HAPPY PATH
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES('Valve Adaptation', 'Customer was instructed to turn the valve with their hand rather than a high-powered drill. Customer reports product is now working effectively', 1) 
 	
-	#Test one(product) to many(case)
-	insert into SUPPORT(CASE_ID, P_ID)
-	VALUES(2,1)	
+	//TEST BLANK AND NULL RES_NAME
+	//Blank or null entries in RES_NAME field should result in an arror.
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES('', 'Test Steps', 2) 
 
-#TEST LEAD_TO
-	#HAPPY PATH
-	insert into LEAD_TO(CASE_ID, RES_ID)
-	VALUES(1, 1)
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES(NULL, 'Test Steps', 2) 
+	//Test Result: PASS
 
-	#Try to insert the same value and see if you get an error (you should)
-	insert into LEAD_TO(CASE_ID, RES_ID)
-	VALUES(1, 1)	
+	//TEST BLANK AND NULL STEPS
+	//Blank or null entries in STEPS field should result in an arror.
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES('Test Resolution', '', 2)
 
-	#Test one(case) to many(resolution) (should fail; only one resolution for case)
-	LEAD_TO(CASE_ID, RES_ID)
-	VALUES(1,2)	
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES('Test Resolution', NULL, 2)
+ 	//Test Result: PASS	
+
+	//TEST ONE-TO-ONE RELATIONSHIP WITH CASES
+	//A single case can not have more than one resolution. Accordingly, the entry of a second resolution for a case should result in an error.
+		insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+		VALUES('Test Resolution', 'Test Steps', 1), ('Test Resolution2', 'Test Steps2', 1) 
+	//Test Result: PASS	
+
+
+//TEST SELL
+	//HAPPY PATH
+		insert into SELL(SP_ID, P_ID)
+		VALUES(1,1)
+
+	//TEST MANY-TO-MANY RELATIONSHP BETWEEN SALESPERSONS AND PRODUCTS
+	/*A Salesperson should be able to sell many different products. 
+	Conversely, any individual product should be able to be sold by many different salespeople.
+	The addition of multiple entries should not result in any errors.*/
+
+	//Test one(SP) to many(P)
+		insert into SELL(SP_ID, P_ID)
+		VALUES (1,1), (1,2)	
+	//Test Result: PASS
 	
-	#Test one(resolution) to many(case) (should fail; only one case for each resolution)
-	insert into SUPPORT(CASE_ID, P_ID)
-	VALUES(2,1)	
-
-#TEST OPEN
-	#None yet, as I have questions about its implementation
-
-#TEST NOTE
-	#None yet, as I have questions about its implementation
-
-#TEST RELATE_TO
-	#None yet, as I have questions about its implementation
+	//Test one(P) to many(SP)
+		insert into SELL(SP_ID, P_ID)
+		VALUES (1, 1), (2,1)
+	//Test Result: PASS	
