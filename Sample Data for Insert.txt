@@ -1,4 +1,4 @@
-Database Sample Data
+//Database Sample Data
 
 /* Insert new salesperson info */
 insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
@@ -52,14 +52,14 @@ insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
 
 /* Insert new case */
 insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
-	VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 1, TO_DATE('20210304','YYYYMMDD'), TO_DATE('20210506','YYYYMMDD')),
-	('Valve stuck', 'Valve was turned too far and can''t get unstuck.', TRUE, 1, 4, TO_DATE('20210405','YYYYMMDD'), TO_DATE('20210607','YYYYMMDD')),
-	('Valve won''t close', 'Customer is having difficulty closing the valve all the way.', TRUE, 1, 6, TO_DATE('20210607','YYYYMMDD'), TO_DATE('20210708','YYYYMMDD')),
-	('Disorientation', 'Customer went on a rollercoaster despite instructions to not do so.', TRUE, 1, 9, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
-	('Nausea', 'Customer is still experiencing nausea.', TRUE, 1, 9, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
-	('Too much electricity', 'The customer used too much electricity which resulted in damage rather than healing.', TRUE, 1, 3, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
-	('Customer too heavy', 'The customer was not able to jump and levitate despite taking the medication.', TRUE, 1, 7, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
-	('Customer attained food poisoning', 'The customer attained food poisoning despite taking the medication.', TRUE, 1, 11, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
+	VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 1, TO_DATE('20210304','YYYYMMDD'), NULL),
+	('Valve stuck', 'Valve was turned too far and can''t get unstuck.', TRUE, 1, 4, TO_DATE('20210405','YYYYMMDD'), NULL),
+	('Valve won''t close', 'Customer is having difficulty closing the valve all the way.', TRUE, 1, 6, TO_DATE('20210607','YYYYMMDD'), NULL),
+	('Disorientation', 'Customer went on a rollercoaster despite instructions to not do so.', TRUE, 1, 9, TO_DATE('20210101','YYYYMMDD'), NULL),
+	('Nausea', 'Customer is still experiencing nausea.', TRUE, 1, 9, TO_DATE('20210101','YYYYMMDD'), NULL),
+	('Too much electricity', 'The customer used too much electricity which resulted in damage rather than healing.', TRUE, 1, 3, TO_DATE('20210101','YYYYMMDD'), NULL),
+	('Customer too heavy', 'The customer was not able to jump and levitate despite taking the medication.', TRUE, 1, 7, TO_DATE('20210101','YYYYMMDD'), NULL),
+	('Customer attained food poisoning', 'The customer attained food poisoning despite taking the medication.', TRUE, 1, 11, TO_DATE('20210101','YYYYMMDD'), NULL),
 	('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', FALSE, 1, 12, TO_DATE('20210304','YYYYMMDD'), TO_DATE('20210506','YYYYMMDD')),
 	('Valve stuck', 'Valve was turned too far and can''t get unstuck.', FALSE, 1, 18, TO_DATE('20210405','YYYYMMDD'), TO_DATE('20210607','YYYYMMDD')),
 	('Valve won''t close', 'Customer is having difficulty closing the valve all the way.', FALSE, 5, 23, TO_DATE('20210607','YYYYMMDD'), TO_DATE('20210708','YYYYMMDD')),
@@ -95,7 +95,7 @@ insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
 
 /* Insert new sell info */
 insert into SELL(SP_ID, P_ID)
-	VALUES(1,1)
+	VALUES(1,1), (1,2), (1,3), (1,4), (1,5)
 
 /*Notes:
 Ensuring a Resolution can't be created for a case that hasn't been closed.
