@@ -1,4 +1,4 @@
-//Database Sample Data
+/*Database Sample Data*/
 
 /* Insert new salesperson info */
 insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
@@ -6,7 +6,7 @@ insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
 	('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson'),
 	('John Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Johnny1964@jourrapide.com', 'Salesperson'),
 	('Saul Goodman', '345 Main St.', 'Phoenix', 'AZ', 87342, 's.goodman777@gmail.com', 'Jr. Salesperson'),
-	('Warner Heisenberg', '82 Pine Tree Lane', 'Phoenix', 'AZ', 81547, 'h.heisenberg@gmail.com', 'Salesperson')
+	('Warner Heisenberg', '82 Pine Tree Lane', 'Phoenix', 'AZ', 81547, 'h.heisenberg@gmail.com', 'Salesperson');
 
 /* Insert new customer information */
 INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
@@ -20,7 +20,7 @@ VALUES
 ('George Washington', 4, '1 Main Street', 'Fredericksburg', 'VA', 01234, 'U.S. Government', 43562), 
 ('John Adams', 4, '987 Commonwealth Ave.', 'Boston', 'MA', 15238, 'U.S. Government', 216788),
 ('Thomas Jefferson', 4, '42 Main Street', 'Fredericksburg', 'VA', 01234, 'U.S. Government', 111555),
-('Ben Franklin', 4, '17 Milk Street', 'Boston', 'MA', 15467, 'U.S. Government', 1000000)
+('Ben Franklin', 4, '17 Milk Street', 'Boston', 'MA', 15467, 'U.S. Government', 1000000);
   
 
 /* Use this statement to insert new product information */
@@ -30,13 +30,13 @@ VALUES
 ('Icetex', 'Your eyes will sweat with this!'),
 ('Volt Tondom', 'The number of miraculous self-healings will rise'),
 ('Zenlux', 'It''s as light as a feather!'),
-('Span Tinfind', 'You and I are warriors of the biosphere.')
+('Span Tinfind', 'You and I are warriors of the biosphere.');
 
 
 
 /* Use this statement to create a record of product ownership */
 
-INSERT INTO OWN(CUST_ID, P_ID) VALUES (1,1), (1,2), (1,3), (1,1), (1,2), (1,1), (2,4), (2,2), (3,1), (3,3), (3,5), (3,1), (3,5), (4,2), (4,3), (4,4), (4,2), (5,1), (5,2), (5,3), (5,4), (5,5), (6,1), (6,2), (6,5), (7,1), (7,3), (7,4), (8,4), (8,5), (8,5), (9,1), (9,1), (9,2), (10,2), (10,2), (1,1), (1,1), (2,4), (3,2), (3,3), (4,1), (7,2), (8,3)
+INSERT INTO OWN(CUST_ID, P_ID) VALUES (1,1), (1,2), (1,3), (1,1), (1,2), (1,1), (2,4), (2,2), (3,1), (3,3), (3,5), (3,1), (3,5), (4,2), (4,3), (4,4), (4,2), (5,1), (5,2), (5,3), (5,4), (5,5), (6,1), (6,2), (6,5), (7,1), (7,3), (7,4), (8,4), (8,5), (8,5), (9,1), (9,1), (9,2), (10,2), (10,2), (1,1), (1,1), (2,4), (3,2), (3,3), (4,1), (7,2), (8,3);
 
 
 
@@ -46,7 +46,7 @@ insert into EMPLOYEES(NAME, STREET, CITY, STATE, ZIP, PHONE, EMAIL)
 		('Michael', '105 Woodland Avenue', 'New Orleans', 'LA', 70112, '202-555-0543', 'hello123@gmail.com'),
 		('Jim', '123 Main Street', 'Pittsburgh', 'LA', 15213, '202-555-0543', 'cooldude7@gmail.com'),
 		('Pam', '22 Highland Ave.', 'Pittsburgh', 'LA', 15213, '202-555-0543', 'test769@hotmail.com'),
-		('Dwight', '999 Liberty Ave.', 'Pittsburgh', 'LA', 15213, '202-555-0543', 'blah555@hotmail.com')
+		('Dwight', '999 Liberty Ave.', 'Pittsburgh', 'LA', 15213, '202-555-0543', 'blah555@hotmail.com');
 
 
 
@@ -67,7 +67,7 @@ insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECL
 	('Nausea', 'Customer is still experiencing nausea.', FALSE, 1, 32, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
 	('Too much electricity', 'The customer used too much electricity which resulted in damage rather than healing.', FALSE, 2, 15, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
 	('Customer too heavy', 'The customer was not able to jump and levitate despite taking the medication.', FALSE, 3, 16, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD')),
-	('Customer attained food poisoning', 'The customer attained food poisoning despite taking the medication.', FALSE, 4, 22, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD'))
+	('Customer attained food poisoning', 'The customer attained food poisoning despite taking the medication.', FALSE, 4, 22, TO_DATE('20210101','YYYYMMDD'), TO_DATE('20211231','YYYYMMDD'));
 			
 
 /* Insert new case comments */
@@ -76,7 +76,7 @@ insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
 	(1, '12:00:00', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot'),
 	(2, '1:30:00', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot'),
 	(3, '2:45:00', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot'),
-	(1, '5:00:00', TO_DATE('20210304','YYYYMMDD'), 'This guy is crazy. He insists on continuing to use the high-powered drill.')
+	(1, '5:00:00', TO_DATE('20210304','YYYYMMDD'), 'This guy is crazy. He insists on continuing to use the high-powered drill.');
 		
 
 /* Insert new resolution */
@@ -89,16 +89,14 @@ insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
 	('Nausea alleviated', 'Customer was drink water and meditate. After this, their nausea went away.', 13),
 	('Electricity minimized', 'Customer was instructed to wear rubber gloves and boots when using the product. This minimized the electricity to acceptable levels.', 14),
 	('Spring shoes', 'Customer was instructed to wear spring shoes when trying to levitate. With the extra bounce in their jump, they were able to successfully levitate.', 15),
-	('Probiotic supplement', 'Customer was instructed to take a probiotic supplement when using the product. This eliminated any food poisoning effects.', 16)
+	('Probiotic supplement', 'Customer was instructed to take a probiotic supplement when using the product. This eliminated any food poisoning effects.', 16);
 	 
 
 
 /* Insert new sell info */
 insert into SELL(SP_ID, P_ID)
-	VALUES(1,1), (1,2), (1,3), (1,4), (1,5)
+	VALUES(1,1), (1,2), (1,3), (1,4), (1,5);
 
 /*Notes:
 Ensuring a Resolution can't be created for a case that hasn't been closed.
-Do we really need the SELL table, or is it redundant?
-Using O_ID in place of CUST_ID and P_ID for CASES?
 */
