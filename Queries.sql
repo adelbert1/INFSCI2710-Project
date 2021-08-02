@@ -15,7 +15,7 @@ ORDER BY C.NAME
 /* Search for all customers with or including given name */
 SELECT * 
 FROM CUSTOMERS
-WHERE C.NAME LIKE '%Bart%'
+WHERE NAME LIKE '%Bart%'
 
 /* Search for personal and contact information about a customer */
 SELECT NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS
