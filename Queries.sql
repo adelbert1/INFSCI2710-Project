@@ -105,6 +105,40 @@ WHERE C.EMP_ID = 1
 GROUP BY C.STATUS
 ORDER BY CASE_COUNT
 
+/* --QUERIES FOR CREATION OF NEW TUPLES IN EACH TABLE-- */
+
+/* Insert new salesperson info */
+insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson'),
+
+/* Insert new customer information */
+INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+VALUES('Bart Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Elementary', 10),
+
+/* Insert new product information */
+INSERT INTO PRODUCTS(NAME, DESCRIPTION)
+VALUES('Alphalax', 'Never go on a rollercoaster again!'),
+
+/* Create a record of product ownership */
+INSERT INTO OWN(CUST_ID, P_ID) 
+VALUES(1,1)
+
+/* Insert new case */
+insert into CASES(SUMMARY, DESCRIPTION, STATUS, EMP_ID, O_ID, TIMEOPENED, TIMECLOSED)
+VALUES('Broken valve', 'Valve breaks upon attempting to turn with high-powered drill.', TRUE, 1, 1, TO_DATE('20210304','YYYYMMDD'), NULL)
+
+/* Insert new case comments */
+insert into CASE_COMMENTS(CASE_ID, COMMENT_TIME, COMMENT_DATE, CASE_COMMENT)
+VALUES (1, '12:00:00', TO_DATE('20210304','YYYYMMDD'), 'Maybe don''t use a high-powered drill to turn a valve, idiot')
+
+/* Insert new resolution */
+insert into RESOLUTIONS(RES_NAME, STEPS, CASE_ID)
+VALUES('Valve Fixed', 'Customer was instructed to reverse the high-powered drill and run it in the opposite direction.', 1)
+
+/* Insert new sell info */
+insert into SELL(SP_ID, P_ID)
+VALUES(1,1)
+
 --UPDATE AND DELETE CASES
 
 --Update address of customer
