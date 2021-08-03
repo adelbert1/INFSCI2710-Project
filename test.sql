@@ -10,46 +10,77 @@ Either 1) an error results where we expected to receive an error or
 //TEST SALESPERSONS
 
 	//HAPPY PATH
-		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
-		VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', '412-444-1234', 'Salesperson')
 
 	//TEST EMAIL_FORMAT CHECK -- Email entries that are not in the proper format should result in an error
-		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
-		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'BadFormat', 'Salesperson')
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'BadFormat', '412-444-1234', 'Salesperson')
+		
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'Bad@@Format.com', '412-444-1234', 'Salesperson')
+		
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'Bad@Format..com', '412-444-1234', 'Salesperson')
+	//Test Result: PASS
+	
+	//TEST PHONE_FORMAT CHECK -- Phone entries that are not in the proper format should result in an error
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'Vorcy1964@jourrapide.com', '4124441234', 'Salesperson')
+		
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+		VALUES('Brian J Wooley', '1733 Nicholas Street', 'Concordia', 'KS', 66901, 'Vorcy1964@jourrapide.com', '412.444.1234', 'Salesperson')
 	//Test Result: PASS
 
 	//TEST BLANK AND NULL NAMES
 	//Blank or null entries in NAME field should result in an arror.
-		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
 		VALUES('', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
 
-		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
 		VALUES(NULL, '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
 	//Test Result: PASS	
 
 //TEST CUSTOMERS
 
 	//HAPPY PATH
-		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
 
-	//TEST NULL NAMES
+	//TEST BLANK AND NULL NAMES
 	//Blank or null entries in NAME field should result in an arror.
-		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES(1, '', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, '', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
 
-		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES(1, NULL, '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, NULL, '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
 	//Test Result: PASS
  
 
 	//TEST BLANK AND NULL SP_ID
 	//Blank or null entries in SP_ID field should result in an arror.
-		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES('', 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+		iinsert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES('', 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
 
-		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-		VALUES(NULL, 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'Bob''s Burgers', 250000)
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(NULL, 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
+	//Test Result: PASS
+	
+	//TEST EMAIL_FORMAT CHECK -- Email entries that are not in the proper format should result in an error
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'badformat', '412-333-4567', 'Bob''s Burgers', 250000)
+		
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'bad@@@format...com', '412-333-4567', 'Bob''s Burgers', 250000)
+		
+	//Test Result: PASS
+	
+	//TEST PHONE_FORMAT CHECK -- Phone entries that are not in the proper format should result in an error
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '4123334567', 'Bob''s Burgers', 250000)
+		
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		VALUES(1, 'John Smith', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412.333.4567', 'Bob''s Burgers', 250000)
 	//Test Result: PASS
 
 //TEST PRODUCTS
