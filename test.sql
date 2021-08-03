@@ -59,7 +59,7 @@ Either 1) an error results where we expected to receive an error or
 
 	//TEST BLANK AND NULL SP_ID
 	//Blank or null entries in SP_ID field should result in an arror.
-		iinsert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
 		VALUES('', 'Test Name', '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'j.smith@gmail.com', '412-333-4567', 'Bob''s Burgers', 250000)
 
 		insert into CUSTOMERS(SP_ID, NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
