@@ -1,26 +1,26 @@
 /*Database Sample Data*/
 
 /* Insert new salesperson info */
-insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
+insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
 	VALUES
-	('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson'),
-	('John Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Johnny1964@jourrapide.com', 'Salesperson'),
-	('Saul Goodman', '345 Main St.', 'Phoenix', 'AZ', 87342, 's.goodman777@gmail.com', 'Jr. Salesperson'),
-	('Warner Heisenberg', '82 Pine Tree Lane', 'Phoenix', 'AZ', 81547, 'h.heisenberg@gmail.com', 'Salesperson');
+	('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', '412-444-5555', 'Salesperson'),
+	('John Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Johnny1964@jourrapide.com', '412-444-6666', 'Salesperson'),
+	('Saul Goodman', '345 Main St.', 'Phoenix', 'AZ', 87342, 's.goodman777@gmail.com', '867-345-7634', 'Jr. Salesperson'),
+	('Warner Heisenberg', '82 Pine Tree Lane', 'Phoenix', 'AZ', 81547, 'h.heisenberg@gmail.com', '867-674-9254', 'Salesperson');
 
 /* Insert new customer information */
-INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
 VALUES
-('Bart Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Elementary', 10),
-('Lisa Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Elementary', 100),
-('Marge Simpson', 1, '123 Main St.', 'Springfield', 'IL', '12345', 'Quik-E-Mart', 1000),
-('Homer Simpson', 1, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Power Plant', 10000),
-('Maggie Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Daycare', 100000),
-('John Smith', 2, '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'PNC Bank', 250000),
-('George Washington', 4, '1 Main Street', 'Fredericksburg', 'VA', 01234, 'U.S. Government', 43562), 
-('John Adams', 4, '987 Commonwealth Ave.', 'Boston', 'MA', 15238, 'U.S. Government', 216788),
-('Thomas Jefferson', 4, '42 Main Street', 'Fredericksburg', 'VA', 01234, 'U.S. Government', 111555),
-('Ben Franklin', 4, '17 Milk Street', 'Boston', 'MA', 15467, 'U.S. Government', 1000000);
+('Bart Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'bart@gmail.com', '555-555-5555', 'Springfield Elementary', 10),
+('Lisa Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'lisa@gmail.com', '234-567-8900', 'Springfield Elementary', 100),
+('Marge Simpson', 1, '123 Main St.', 'Springfield', 'IL', '12345', 'marge@gmail.com', '234-567-8900', 'Quik-E-Mart', 1000),
+('Homer Simpson', 1, '123 Main St.', 'Springfield', 'IL', '12345', 'homer@gmail.com', '234-567-8900', 'Springfield Power Plant', 10000),
+('Maggie Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'maggie@gmail.com', '234-567-8900', 'Springfield Daycare', 100000),
+('John Smith', 2, '43 Main Street', 'Wilkinsburg', 'PA', 14447, 'jsmith777@aol.com', '412-456-7890', 'PNC Bank', 250000),
+('George Washington', 4, '1 Main Street', 'Fredericksburg', 'VA', 01234, 'gw1@usgove.com', '111-111-1111', 'U.S. Government', 43562), 
+('John Adams', 4, '987 Commonwealth Ave.', 'Boston', 'MA', 15238, 'ja2@usgov.com', '222-222-2222', 'U.S. Government', 216788),
+('Thomas Jefferson', 4, '42 Main Street', 'Fredericksburg', 'VA', 01234, 'tj3@usgov.com', '333-333-3333', 'U.S. Government', 111555),
+('Ben Franklin', 4, '17 Milk Street', 'Boston', 'MA', 15467, 'bf1776@usgov.com', '444-444-4444', 'U.S. Government', 1000000);
   
 
 /* Use this statement to insert new product information */
