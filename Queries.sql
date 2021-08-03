@@ -12,25 +12,32 @@ AND C.NAME LIKE '%Bart Simpson%'
 GROUP BY P.NAME, C.NAME 
 ORDER BY C.NAME
 
-/* Search for all customers with or including given name */
+/* Search for all customers with or including given name and return all of their information. */
 SELECT * 
 FROM CUSTOMERS
 WHERE NAME LIKE '%Bart%'
 
 /* Search for personal and contact information about a customer */
-SELECT NAME, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS
+SELECT NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS
 FROM CUSTOMERS
 WHERE NAME LIKE '%Bart%'
 
-/* See general information for a specific case given the case number (status, customer name, product, case summary, case description, case comments)
+/* See general information for a specific case given the case number (status, customer name, product, case summary, case description, case comments) */
 SELECT DISTINCT CA.CASE_ID, CA.STATUS, CU.NAME, P.NAME, CA.SUMMARY, CA.DESCRIPTION, CA.TIMEOPENED, CA.TIMECLOSED, CC.CASE_COMMENT 
 FROM CASES CA, CUSTOMERS CU, RESOLUTIONS R, CASE_COMMENTS CC, OWN O, PRODUCTS P
 WHERE CA.CASE_ID = 1
 AND CA.O_ID = O.O_ID AND O.CUST_ID = CU.CUST_ID AND O.P_ID = P.P_ID AND CC.CASE_ID = CA.CASE_ID
-/* Search for cases by status and timeframe */
+
+/* Search for open cases by status and timeframe */
 SELECT *
 FROM CASES
 WHERE STATUS = TRUE 
+AND TIMEOPENED >= '20210303'
+
+/* Search for closed cases by status and timeframe */
+SELECT *
+FROM CASES
+WHERE STATUS = FALSE 
 AND TIMEOPENED >= '20210303' AND TIMECLOSED <= '20210508'
 
 /* Search for common resolutions by product */
@@ -94,9 +101,10 @@ GROUP BY S.NAME, P.NAME
 ORDER BY S.NAME, Total_Products_Sold DESC
 
 /* The total amount of money a specific company has spent on products. */ 
-SELECT distinct COMPANY, SUM(COMPANY_GROSS_INCOME_DOLLARS)
+SELECT distinct COMPANY, SUM(COMPANY_GROSS_INCOME_DOLLARS) as Total_Gross
 FROM CUSTOMERS
-GROUP BY COMPANY
+GROUP BY COMPANY 
+ORDER BY Total_Gross DESC
 
 /* The number of cases a specific employee currently has opened and the number that employee has closed */
 SELECT C.STATUS, COUNT(CASE_ID) as CASE_COUNT
@@ -108,16 +116,16 @@ ORDER BY CASE_COUNT
 /* --QUERIES FOR CREATION OF NEW TUPLES IN EACH TABLE-- */
 
 /* Insert new salesperson info */
-insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, JOB_TITLE)
-VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson'),
+insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
+VALUES('Jane Doe', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', '657-444-5555', 'Salesperson')
 
 /* Insert new customer information */
-INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
-VALUES('Bart Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'Springfield Elementary', 10),
+INSERT INTO CUSTOMERS (NAME, SP_ID, STREET, CITY, STATE, ZIP, EMAIL, PHONE, COMPANY, COMPANY_GROSS_INCOME_DOLLARS)
+VALUES('Bart Simpson', 3, '123 Main St.', 'Springfield', 'IL', '12345', 'bart@gmail.com', '555-555-5555', 'Springfield Elementary', 10)
 
 /* Insert new product information */
 INSERT INTO PRODUCTS(NAME, DESCRIPTION)
-VALUES('Alphalax', 'Never go on a rollercoaster again!'),
+VALUES('Alphalax', 'Never go on a rollercoaster again!')
 
 /* Create a record of product ownership */
 INSERT INTO OWN(CUST_ID, P_ID) 
