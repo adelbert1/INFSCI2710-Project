@@ -35,10 +35,10 @@ Either 1) an error results where we expected to receive an error or
 	//TEST BLANK AND NULL NAMES
 	//Blank or null entries in NAME field should result in an arror.
 		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
-		VALUES('', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
+		VALUES('', '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', '412-444-1234', 'Salesperson')
 
 		insert into SALESPERSONS(NAME, STREET, CITY, STATE, ZIP, EMAIL, PHONE, JOB_TITLE)
-		VALUES(NULL, '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', 'Salesperson')
+		VALUES(NULL, '4739 Collins Avenue', 'TRACY', 'MN', 56175, 'Vorcy1964@jourrapide.com', '412-444-1234', 'Salesperson')
 	//Test Result: PASS	
 
 //TEST CUSTOMERS
