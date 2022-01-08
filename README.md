@@ -10,4 +10,4 @@ The database is able to keep track of customers including their personal informa
 Additionally, the database is able to keep track of employees that work at the company. These employees are the primary users of the database software. Employees can open cases to
 support the products and see the cases through to associated resolutions which are also tracked within the database.
 
-For an extensive overview and detailed descriptions of each aspect of this database project, please refer to the the 
+For an extensive overview and detailed descriptions of each aspect of this database project, please refer to the the "Database Management Systems Final Report" document. This document includes a table of contents which will enable you to quickly navigate to any areas of interest.
