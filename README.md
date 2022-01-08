@@ -1,6 +1,6 @@
-#Database Management Systems: Final Project
+# Database Management Systems: Final Project
 
-##Purpose of the project
+## Purpose of the project
 Within this project, we have analyzed the requirements, designed, implemented, documented and demonstrated a database system that can be used by a help desk staff to ensure customer issues are resolved.
 
 To accomplish this, we have created a catalog of products provided by the company. Accordingly, we have designed the system so that it can maintain a record of customers 
